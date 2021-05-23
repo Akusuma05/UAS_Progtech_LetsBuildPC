@@ -1,9 +1,7 @@
 package com.example.mainactivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,14 +9,15 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Home#newInstance} factory method to
+ * Use the {@link specific_component#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Home extends Fragment {
-    private CardView cardView_entrylevel, cardView_pcmahal;
+public class specific_component extends Fragment {
+    private ImageView gambar_item_specific;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +28,7 @@ public class Home extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Home() {
+    public specific_component() {
         // Required empty public constructor
     }
 
@@ -39,11 +38,11 @@ public class Home extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Home.
+     * @return A new instance of fragment specific_component.
      */
     // TODO: Rename and change types and number of parameters
-    public static Home newInstance(String param1, String param2) {
-        Home fragment = new Home();
+    public static specific_component newInstance(String param1, String param2) {
+        specific_component fragment = new specific_component();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,15 +62,14 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v  = inflater.inflate(R.layout.fragment_home, container, false);
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_specific_component, container, false);
+        gambar_item_specific = v.findViewById(R.id.gambar_item_specific);
 
-        cardView_entrylevel = v.findViewById(R.id.cardView_entrylevel);
-        cardView_pcmahal = v.findViewById(R.id.cardView_pcmahal);
-
-        cardView_entrylevel.setOnClickListener(new View.OnClickListener() {
+        gambar_item_specific.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new specific_component();
+                Fragment fragment = new Home();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -80,9 +78,6 @@ public class Home extends Fragment {
             }
         });
 
-        // Inflate the layout for this fragment
         return v;
-
-
     }
 }
