@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/home2">
+
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.mainactivity.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/mylist"
+        android:name="com.example.mainactivity.mylist"
+        android:label="fragment_mylist"
+        tools:layout="@layout/fragment_mylist" />
+    <fragment
+        android:id="@+id/addbuild"
+        android:name="com.example.mainactivity.addbuild"
+        android:label="fragment_addbuild"
+        tools:layout="@layout/fragment_addbuild" />
+    <fragment
+        android:id="@+id/componentlist"
+        android:name="com.example.mainactivity.componentlist"
+        android:label="fragment_componentlist"
+        tools:layout="@layout/fragment_componentlist" />
+    <fragment
+        android:id="@+id/userinfo"
+        android:name="com.example.mainactivity.userinfo"
+        android:label="fragment_userinfo"
+        tools:layout="@layout/fragment_userinfo" />
+</navigation>
