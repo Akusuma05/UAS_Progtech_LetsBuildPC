@@ -11,13 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link userinfo#newInstance} factory method to
+ * Use the {@link register#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class userinfo extends Fragment {
-    private TextView registerhere_button;
+public class register extends Fragment {
+    private TextView relogin_button;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +30,7 @@ public class userinfo extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public userinfo() {
+    public register() {
         // Required empty public constructor
     }
 
@@ -38,11 +40,11 @@ public class userinfo extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment userinfo.
+     * @return A new instance of fragment register.
      */
     // TODO: Rename and change types and number of parameters
-    public static userinfo newInstance(String param1, String param2) {
-        userinfo fragment = new userinfo();
+    public static register newInstance(String param1, String param2) {
+        register fragment = new register();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,12 +65,12 @@ public class userinfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_userinfo, container, false);
-        registerhere_button = v.findViewById(R.id.registerhere_button);
-        registerhere_button.setOnClickListener(new View.OnClickListener() {
+        View v = inflater.inflate(R.layout.fragment_register, container, false);
+        relogin_button=v.findViewById(R.id.relogin_button);
+        relogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new register();
+                Fragment fragment = new userinfo();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -76,6 +78,7 @@ public class userinfo extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
         return v;
     }
 }
