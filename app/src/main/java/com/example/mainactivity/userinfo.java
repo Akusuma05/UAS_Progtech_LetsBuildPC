@@ -103,6 +103,7 @@ public class userinfo extends Fragment {
         input_password_login = v.findViewById(R.id.input_password_login);
         dont_have_account = v.findViewById(R.id.dont_have_account);
 
+
         //Kondisi apabila sudah login
         for (int i = 0; i <listuser.size(); i++){
             user tempuser = listuser.get(i);
@@ -144,7 +145,7 @@ public class userinfo extends Fragment {
                 if(validateEmail && validatePassword){
                     for (int i = 0; i <listuser.size(); i++){
                         user tempuser = listuser.get(i);
-                        if (tempuser.getEmail().equalsIgnoreCase(email) && tempuser.getPassword().equalsIgnoreCase(password)) {
+                        if (tempuser.getEmail().equalsIgnoreCase(email) && tempuser.getPassword().equals(password)) {
 
                             //Set Visibility dari form Login
                             registerhere_button.setVisibility(View.INVISIBLE);
@@ -160,6 +161,8 @@ public class userinfo extends Fragment {
 
                             nama_user.setText(tempuser.getNama());
                             tempuser.setSudahlogin("yes");
+                            input_email_login.getEditText().setText("");
+                            input_password_login.getEditText().setText("");
                             Toast.makeText(getContext(), "Login Sukses", Toast.LENGTH_SHORT).show();
                             break;
                         } else {
@@ -171,7 +174,6 @@ public class userinfo extends Fragment {
                     input_password_login.setError("Please correct the password column");
                     input_email_login.setError("Please Correct the email column");
                 }
-                Toast.makeText(getContext(), "Login Berhasil", Toast.LENGTH_LONG).show();
             }
         });
 
