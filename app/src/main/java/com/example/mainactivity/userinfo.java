@@ -17,8 +17,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -28,9 +37,9 @@ import model.account;
 import model.user;
 
 public class userinfo extends Fragment {
-    private TextView  welcome, nama_user;
+    private TextView  nama_user;
     private Button logout_button;
-    private ArrayList<user> listuser = account.listuser;
+    private ArrayList<user> listuser = new ArrayList<user>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,8 +49,9 @@ public class userinfo extends Fragment {
 
         //Deklarasi
         logout_button = v.findViewById(R.id.logout_button);
-        welcome = v.findViewById(R.id.welcome);
         nama_user = v.findViewById(R.id.nama_user);
+        loadDataDB();
+
         for (int i = 0; i <listuser.size(); i++){
             user tempuser = listuser.get(i);
             if (tempuser.getSudahlogin().equals("yes")){
@@ -70,6 +80,44 @@ public class userinfo extends Fragment {
 
 
 
+
+
         return v;
+    }
+
+    private void loadDataDB() {
+        String url ="http://192.168.1.8/letsbuildpc/ReadUser.php";
+        RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonuser = response.getJSONArray("user");
+                            for (int i = 0; i < jsonuser.length(); i++){
+                                JSONObject objuser = jsonuser.getJSONObject(i);
+                                user user1 = new user();
+                                user1.setId_user(objuser.getInt("id_user"));
+                                user1.setNama(objuser.getString("Nama"));
+                                user1.setEmail(objuser.getString("Email"));
+                                user1.setPassword(objuser.getString("Password"));
+                                user1.setSudahlogin(objuser.getString("Sudah_Login"));
+                                listuser.add(user1);
+                            }
+//                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+
+        myQueue.add(request);
     }
 }

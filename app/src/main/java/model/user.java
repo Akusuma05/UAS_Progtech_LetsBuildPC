@@ -5,6 +5,15 @@ import android.os.Parcelable;
 
 public class user implements Parcelable {
     private String nama, email, password, sudahlogin;
+    private int id_user;
+
+    public user(String nama, String email, String password, String sudahlogin, int id_user) {
+        this.nama = nama;
+        this.email = email;
+        this.password = password;
+        this.sudahlogin = sudahlogin;
+        this.id_user = id_user;
+    }
 
     public user(String nama, String email, String password, String sudahlogin) {
         this.nama = nama;
@@ -18,6 +27,7 @@ public class user implements Parcelable {
         email = in.readString();
         password = in.readString();
         sudahlogin = in.readString();
+        id_user = in.readInt();
     }
 
     public static final Creator<user> CREATOR = new Creator<user>() {
@@ -31,6 +41,14 @@ public class user implements Parcelable {
             return new user[size];
         }
     };
+
+    public user() {
+        this.id_user = 0;
+        this.nama = "";
+        this.email = "";
+        this.password = "";
+        this.sudahlogin = "";
+    }
 
     public String getNama() {
         return nama;
@@ -64,6 +82,14 @@ public class user implements Parcelable {
         this.sudahlogin = sudahlogin;
     }
 
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -75,5 +101,6 @@ public class user implements Parcelable {
         dest.writeString(email);
         dest.writeString(password);
         dest.writeString(sudahlogin);
+        dest.writeInt(id_user);
     }
 }

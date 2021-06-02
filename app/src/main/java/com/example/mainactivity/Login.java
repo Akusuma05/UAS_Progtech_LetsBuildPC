@@ -1,5 +1,6 @@
 package com.example.mainactivity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,9 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import model.account;
@@ -25,9 +40,10 @@ public class Login extends AppCompatActivity {
     private Button login_button;
     private ImageView logo_login;
     private TextInputLayout input_email_login, input_password_login;
-    private ArrayList<user> listuser = account.listuser;
+    private ArrayList<user> listuser = new ArrayList<user>();
     private Boolean validateEmail, validatePassword;
     private int berhasil = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +57,11 @@ public class Login extends AppCompatActivity {
         input_email_login = findViewById(R.id.input_email_login);
         input_password_login = findViewById(R.id.input_password_login);
         dont_have_account = findViewById(R.id.dont_have_account);
+        loadDataDB();
 
         //Menghilangkan Action Bar
         getSupportActionBar().hide();
 
-        if (account.listuser.size() == 0){
-            user user1 = new user("steven", "halohalo@gmail.com", "Halo@1234", "no");
-            account.listuser.add(user1);
-        }
 
         //Login Button
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +76,7 @@ public class Login extends AppCompatActivity {
                         user tempuser = listuser.get(i);
                         if (tempuser.getEmail().equalsIgnoreCase(email) && tempuser.getPassword().equals(password)) {
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                            tempuser.setSudahlogin("yes");
+                            updatesudahlogin(tempuser.getId_user());
                             finish();
                             startActivity(intent);
                             berhasil = 1;
@@ -161,6 +174,71 @@ public class Login extends AppCompatActivity {
 
             }
         });
+    }
 
+
+    private void loadDataDB() {
+        String url ="http://192.168.1.8/letsbuildpc/ReadUser.php";
+        RequestQueue myQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonuser = response.getJSONArray("user");
+                            for (int i = 0; i < jsonuser.length(); i++){
+                                JSONObject objuser = jsonuser.getJSONObject(i);
+                                user user1 = new user();
+                                user1.setId_user(objuser.getInt("id_user"));
+                                user1.setNama(objuser.getString("Nama"));
+                                user1.setEmail(objuser.getString("Email"));
+                                user1.setPassword(objuser.getString("Password"));
+                                user1.setSudahlogin(objuser.getString("Sudah_Login"));
+                                listuser.add(user1);
+                            }
+//                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+
+        myQueue.add(request);
+    }
+
+    private void updatesudahlogin(int id){
+        String url = "http://192.168.1.8/letsbuildpc/Updatesudahloginuser.php";
+        RequestQueue myRequest = Volley.newRequestQueue(this);
+
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data =  new HashMap<>();
+                data.put("id", String.valueOf(id));
+
+                return data;
+            }
+        };
+        myRequest.add(request);
     }
 }
