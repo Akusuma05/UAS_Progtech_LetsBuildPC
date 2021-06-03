@@ -1,7 +1,10 @@
 package com.example.mainactivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,7 +18,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
+import model.componenttype;
+import model.componenttypesimpen;
 import model.pickpc;
 import model.pickpcArray;
 
@@ -27,6 +33,7 @@ public class addbuild extends Fragment {
     private Button button_add_CPU, button_add_CPUCooler, button_add_Motherboard, button_add_Memory, button_add_Storage, button_add_GPU, button_add_Case, button_add_PSU, button_save_build,
             button_edit_CPU, button_edit_CPUCooler, button_edit_Motherboard, button_edit_Memory, button_edit_GPU, button_edit_Case, button_edit_PSU, button_edit_Storage;
     private int id;
+    private String type;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -238,7 +245,9 @@ public class addbuild extends Fragment {
         button_add_CPU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("CPU");
+                componenttypesimpen.tipepilihcomponent = "CPU";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -252,7 +261,9 @@ public class addbuild extends Fragment {
         button_add_CPUCooler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("CPUCooler");
+                componenttypesimpen.tipepilihcomponent = "CPUCooler";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -266,7 +277,9 @@ public class addbuild extends Fragment {
         button_add_Memory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("Memory");
+                componenttypesimpen.tipepilihcomponent = "Memory";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -280,7 +293,9 @@ public class addbuild extends Fragment {
         button_add_Motherboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("Motherboard");
+                componenttypesimpen.tipepilihcomponent = "Motherboard";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -294,7 +309,9 @@ public class addbuild extends Fragment {
         button_add_Storage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("Storage");
+                componenttypesimpen.tipepilihcomponent = "Storage";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -308,7 +325,9 @@ public class addbuild extends Fragment {
         button_add_PSU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("PSU");
+                componenttypesimpen.tipepilihcomponent = "PSU";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -322,7 +341,9 @@ public class addbuild extends Fragment {
         button_add_GPU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("GPU");
+                componenttypesimpen.tipepilihcomponent = "GPU";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -336,7 +357,9 @@ public class addbuild extends Fragment {
         button_add_Case.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new componentlist();
+                componenttype componenttype = new componenttype("Case");
+                componenttypesimpen.tipepilihcomponent = "Case";
+                Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -349,6 +372,4 @@ public class addbuild extends Fragment {
     private void savebutton() {
 
     }
-
-
 }
