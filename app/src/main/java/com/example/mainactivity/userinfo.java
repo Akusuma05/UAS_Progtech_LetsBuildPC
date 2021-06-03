@@ -86,7 +86,7 @@ public class userinfo extends Fragment {
     }
 
     private void loadDataDB() {
-        String url ="http://192.168.1.8/letsbuildpc/ReadUser.php";
+        String url ="http://192.168.1.7/letsbuildpc/ReadUser.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
