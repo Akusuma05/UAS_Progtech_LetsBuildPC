@@ -109,11 +109,11 @@ public class pilihcomponentadapter extends RecyclerView.Adapter<pilihcomponentad
             holder.pilihkomponentextview3.setText("Cooler Type");
             holder.pilihkomponentextview4.setText(listCPU_Cooler.get(position).getCooler_Type());
             holder.pilihkomponentextview5.setText("Fan RPM");
-            holder.pilihkomponentextview6.setText(listCPU_Cooler.get(position).getFan_RPM());
+            holder.pilihkomponentextview6.setText(String.valueOf(listCPU_Cooler.get(position).getFan_RPM()));
             holder.pilihkomponentextview7.setText("Noise Level");
-            holder.pilihkomponentextview8.setText(listCPU_Cooler.get(position).getNoise_Level());
+            holder.pilihkomponentextview8.setText(String.valueOf(listCPU_Cooler.get(position).getNoise_Level()));
             holder.pilihkomponentextview9.setText("Harga");
-            holder.pilihkomponentextview10.setText(listCPU_Cooler.get(position).getHarga_Cooler());
+            holder.pilihkomponentextview10.setText(String.valueOf(listCPU_Cooler.get(position).getHarga_Cooler()));
         }else if(tipe.equals("Memory")){
             holder.pilihkomponentextview1.setVisibility(View.VISIBLE);
             holder.pilihkomponentextview2.setVisibility(View.VISIBLE);
@@ -136,9 +136,9 @@ public class pilihcomponentadapter extends RecyclerView.Adapter<pilihcomponentad
             holder.pilihkomponentextview3.setText("Size");
             holder.pilihkomponentextview4.setText(listMemory.get(position).getSize());
             holder.pilihkomponentextview5.setText("Speed");
-            holder.pilihkomponentextview6.setText(listMemory.get(position).getSpeed());
+            holder.pilihkomponentextview6.setText(String.valueOf(listMemory.get(position).getSpeed()));
             holder.pilihkomponentextview7.setText("Harga");
-            holder.pilihkomponentextview8.setText(listMemory.get(position).getHarga());
+            holder.pilihkomponentextview8.setText(String.valueOf(listMemory.get(position).getHarga()));
 
         }else if(tipe.equals("Motherboard")){
             holder.pilihkomponentextview1.setVisibility(View.VISIBLE);

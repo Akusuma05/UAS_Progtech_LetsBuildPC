@@ -66,6 +66,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
         listCPU.add(new CPU("intel i3", "LGA1200",1,8,200,100,100000));
         listCPU.add(new CPU("intel i5", "LGA1200",1,8,200,100,100000));
         listCPU.add(new CPU("intel i7", "LGA1200",1,8,200,100,100000));
+        listCPU_Cooler.add(new CPU_Cooler("noctua", "aircooler", 1,1,1,1));
         adapter.notifyDataSetChanged();
         return v;
     }

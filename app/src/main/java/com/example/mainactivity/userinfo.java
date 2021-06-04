@@ -31,12 +31,13 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import model.account;
 import model.user;
 
-public class userinfo extends Fragment {
+public class userinfo extends Fragment{
     private TextView  nama_user;
     private Button logout_button;
     private ArrayList<user> listuser = new ArrayList<user>();
@@ -52,12 +53,9 @@ public class userinfo extends Fragment {
         nama_user = v.findViewById(R.id.nama_user);
         loadDataDB();
 
-        for (int i = 0; i <listuser.size(); i++){
-            user tempuser = listuser.get(i);
-            if (tempuser.getSudahlogin().equals("yes")){
-                nama_user.setText(tempuser.getNama());
-            }
-        }
+
+        //Display Nama User
+
 
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,15 +76,11 @@ public class userinfo extends Fragment {
             }
         });
 
-
-
-
-
         return v;
     }
 
     private void loadDataDB() {
-        String url ="http://192.168.1.7/letsbuildpc/ReadUser.php";
+        String url ="http://192.168.1.6/letsbuildpc/ReadUser.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -104,6 +98,13 @@ public class userinfo extends Fragment {
                                 user1.setSudahlogin(objuser.getString("Sudah_Login"));
                                 listuser.add(user1);
                             }
+                            Toast.makeText(getContext(), String.valueOf(listuser.size()), Toast.LENGTH_LONG).show();
+                            for (int i = 0; i <listuser.size(); i++){
+                                user tempuser = listuser.get(i);
+                                if (tempuser.getSudahlogin().equals("yes")){
+                                    nama_user.setText(tempuser.getNama());
+                                }
+                            }
 //                            adapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -117,7 +118,6 @@ public class userinfo extends Fragment {
                     }
                 }
         );
-
         myQueue.add(request);
     }
 }
