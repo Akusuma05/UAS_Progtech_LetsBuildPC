@@ -157,7 +157,7 @@ public class pilihcomponentadapter extends RecyclerView.Adapter<pilihcomponentad
             holder.pilihkomponentextview13.setVisibility(View.INVISIBLE);
             holder.pilihkomponentextview14.setVisibility(View.INVISIBLE);
 
-            holder.pilihkomponentextview1.setText("Nama Motherboard");
+            holder.pilihkomponentextview1.setText("Nama");
             holder.pilihkomponentextview2.setText(listMotherboard.get(position).getNama_Motherboard());
             holder.pilihkomponentextview3.setText("Form Factor");
             holder.pilihkomponentextview4.setText(listMotherboard.get(position).getForm_Factor());
@@ -192,7 +192,7 @@ public class pilihcomponentadapter extends RecyclerView.Adapter<pilihcomponentad
             holder.pilihkomponentextview5.setText("Form Factor");
             holder.pilihkomponentextview6.setText(listStorage.get(position).getForm_Factor());
             holder.pilihkomponentextview7.setText("Size Storage");
-            holder.pilihkomponentextview8.setText(listStorage.get(position).getSize_Storage());
+            holder.pilihkomponentextview8.setText(String.valueOf(listStorage.get(position).getSize_Storage()));
             holder.pilihkomponentextview9.setText("Harga");
             holder.pilihkomponentextview10.setText(String.valueOf(listStorage.get(position).getHarga_Storage()));
 

@@ -17,11 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -31,6 +33,8 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -53,10 +57,6 @@ public class userinfo extends Fragment{
         nama_user = v.findViewById(R.id.nama_user);
         loadDataDB();
 
-
-        //Display Nama User
-
-
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class userinfo extends Fragment{
                 for (int i = 0; i <listuser.size(); i++){
                     user tempuser = listuser.get(i);
                     if (tempuser.getSudahlogin().equals("yes")) {
-                        tempuser.setSudahlogin("no");
+                        updatesudahlogin(tempuser.getId_user());
                         Intent intent = new Intent(getContext(), Login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
@@ -99,6 +99,7 @@ public class userinfo extends Fragment{
                                 listuser.add(user1);
                             }
                             Toast.makeText(getContext(), String.valueOf(listuser.size()), Toast.LENGTH_LONG).show();
+
                             for (int i = 0; i <listuser.size(); i++){
                                 user tempuser = listuser.get(i);
                                 if (tempuser.getSudahlogin().equals("yes")){
@@ -119,5 +120,34 @@ public class userinfo extends Fragment{
                 }
         );
         myQueue.add(request);
+    }
+
+    private void updatesudahlogin(int id){
+        String url = "http://192.168.1.6/letsbuildpc/Updatesudahloginuser.php";
+        RequestQueue myRequest = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data =  new HashMap<>();
+                data.put("id", String.valueOf(id));
+
+                return data;
+            }
+        };
+        myRequest.add(request);
     }
 }
