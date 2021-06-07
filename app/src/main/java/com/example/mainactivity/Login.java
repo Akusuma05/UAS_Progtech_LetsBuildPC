@@ -59,6 +59,7 @@ public class Login extends AppCompatActivity {
         dont_have_account = findViewById(R.id.dont_have_account);
         loadDataDB();
 
+
         //Menghilangkan Action Bar
         getSupportActionBar().hide();
 
@@ -67,6 +68,9 @@ public class Login extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getBaseContext(), String.valueOf(listuser.size()), Toast.LENGTH_SHORT).show();
+
 
                 String email = input_email_login.getEditText().getText().toString().trim();
                 String password = input_password_login.getEditText().getText().toString().trim();
@@ -178,7 +182,7 @@ public class Login extends AppCompatActivity {
 
 
     private void loadDataDB() {
-        String url ="http://192.168.1.7/letsbuildpc/ReadUser.php";
+        String url ="http://192.168.100.4/UAS_progtech/ReadUser.php";
         RequestQueue myQueue = Volley.newRequestQueue(this);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -214,7 +218,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void updatesudahlogin(int id){
-        String url = "http://192.168.1.7/letsbuildpc/Updatesudahloginuser.php";
+        String url = "http://192.168.100.4/UAS_progtech/Updatesudahloginuser.php";
         RequestQueue myRequest = Volley.newRequestQueue(this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url,

@@ -4,8 +4,12 @@
     <string-array name="components">
         <item>Select</item>
         <item>CPU</item>
-        <item>Processor</item>
-        <item>RAM</item>
-        <item>VGA</item>
+        <item>CPU cooler</item>
+        <item>Motherboard</item>
+        <item>Memory</item>
+        <item>Storage</item>
+        <item>GPU</item>
+        <item>Case</item>
+        <item>PSU</item>
     </string-array>
 </resources>
