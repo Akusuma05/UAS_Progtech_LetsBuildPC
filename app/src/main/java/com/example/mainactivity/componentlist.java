@@ -3,6 +3,7 @@ package com.example.mainactivity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,9 @@ public class componentlist extends Fragment {
         android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.components));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_more.setAdapter(adapter);
+
+        RecyclerView recyclerview_complist;
+        //ArrayList<> componentlists
         return v;
     }
 }
