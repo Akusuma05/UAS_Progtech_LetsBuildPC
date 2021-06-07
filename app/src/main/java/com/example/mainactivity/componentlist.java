@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,7 +39,6 @@ import model.componenttype;
 import model.componenttypesimpen;
 
 public class componentlist extends Fragment implements OnCardListener {
-
 
 
     private String tipe = "";
@@ -79,6 +79,17 @@ public class componentlist extends Fragment implements OnCardListener {
                 model.componenttype componenttype = new componenttype(spinner_more.getSelectedItem().toString());
                 componenttypesimpen.tipepilihcomponent = spinner_more.getSelectedItem().toString();
                 tipe = componenttypesimpen.tipepilihcomponent;
+                Toast.makeText(getContext(), tipe, Toast.LENGTH_SHORT).show();
+                initview();
+                setupRecyclerView();
+                loadCPUdata();
+                loadCPUCooler();
+                loadGPU();
+                loadmemory();
+                loadmotherboard();
+                loadPSU();
+                loadStorage();
+                loadCasepc();
             }
 
             @Override
