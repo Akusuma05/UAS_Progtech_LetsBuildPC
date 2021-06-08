@@ -29,7 +29,7 @@
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_action_name" />
+                app:srcCompat="@drawable/ic_baseline_delete_24" />
 
             <TextView
                 android:id="@+id/price_component"
