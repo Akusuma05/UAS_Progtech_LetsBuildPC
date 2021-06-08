@@ -63,7 +63,7 @@ public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.Viewhold
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        public Viewholder(@NonNull @org.jetbrains.annotations.NotNull View itemView) {
+        public Viewholder(@NonNull  View itemView) {
             super(itemView);
             //type_component =
         }

@@ -40,7 +40,6 @@ import model.componenttypesimpen;
 
 public class componentlist extends Fragment implements OnCardListener {
 
-
     private String tipe = "";
     private RecyclerView recyclerview_complist;
     private spinner_adapter spin_adapter;

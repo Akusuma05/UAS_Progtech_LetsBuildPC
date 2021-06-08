@@ -1,6 +1,7 @@
 package com.example.mainactivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ import model.Motherboard;
 import model.PSU;
 import model.Storage;
 import model.componenttypesimpen;
+import model.idpartsimpen;
 import model.user;
 
 public class pilihcomponent extends Fragment implements OnCardListener {
@@ -95,6 +97,23 @@ public class pilihcomponent extends Fragment implements OnCardListener {
 
     @Override
     public void onCardClick(int position) {
+        if (tipe.equals("CPU")){
+            idpartsimpen.idpartsimpen = listCPU.get(position).getId_CPU();
+        }else if(tipe.equals("CPUCooler")){
+            idpartsimpen.idpartsimpen = listCPU_Cooler.get(position).getId_cpucooler();
+        }else if(tipe.equals("Memory")){
+            idpartsimpen.idpartsimpen = listMemory.get(position).getId_memory();
+        }else if(tipe.equals("Motherboard")){
+            idpartsimpen.idpartsimpen = listMotherboard.get(position).getId_motherboard();
+        }else if(tipe.equals("Storage")){
+            idpartsimpen.idpartsimpen = listStorage.get(position).getId_storage();
+        }else if(tipe.equals("PSU")){
+            idpartsimpen.idpartsimpen = listPSU.get(position).getId_psu();
+        }else if(tipe.equals("GPU")){
+            idpartsimpen.idpartsimpen = listGPU.get(position).getId_gpu();
+        }else if(tipe.equals("Case")){
+            idpartsimpen.idpartsimpen = listCasePC.get(position).getId_casepc();
+        }
 
     }
 
