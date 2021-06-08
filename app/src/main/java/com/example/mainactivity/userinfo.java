@@ -40,6 +40,7 @@ import java.util.regex.Pattern;
 
 import model.account;
 import model.user;
+import model.userIDsimpen;
 
 public class userinfo extends Fragment{
     private TextView  nama_user;
@@ -56,6 +57,7 @@ public class userinfo extends Fragment{
         logout_button = v.findViewById(R.id.logout_button);
         nama_user = v.findViewById(R.id.nama_user);
         loadDataDB();
+
 
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +106,7 @@ public class userinfo extends Fragment{
                                 user tempuser = listuser.get(i);
                                 if (tempuser.getSudahlogin().equals("yes")){
                                     nama_user.setText(tempuser.getNama());
+                                    userIDsimpen.useridsimpen = tempuser.getId_user();
                                 }
                             }
 //                            adapter.notifyDataSetChanged();
