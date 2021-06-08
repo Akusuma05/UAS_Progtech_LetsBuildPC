@@ -28,28 +28,17 @@ import model.userIDsimpen;
 public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListViewholder> {
 
     private int id = userIDsimpen.useridsimpen;
-    private ArrayList<CPU> listCPU;
-    private ArrayList<CPU_Cooler> listCPU_Cooler;
-    private ArrayList<GPU> listGPU;
+
     private ArrayList<Memory> listMemory;
-    private ArrayList<Motherboard> listMotherboard;
-    private ArrayList<PSU> listPSU;
+
     private ArrayList<Storage> listStorage;
-    private ArrayList<Casepc> listCasePC;
+
     private ArrayList<MyList> listMylist;
     private OnCardListener cardListener;
 
-    public mylist_adapter(ArrayList<CPU> listCPU, ArrayList<CPU_Cooler> listCPU_Cooler, ArrayList<GPU> listGPU, ArrayList<Memory> listMemory, ArrayList<Motherboard> listMotherboard, ArrayList<PSU> listPSU, ArrayList<Storage> listStorage, ArrayList<Casepc> listCasePC, OnCardListener cardListener) {
-        this.listCPU = listCPU;
-        this.listCPU_Cooler = listCPU_Cooler;
-        this.listGPU = listGPU;
-        this.listMemory = listMemory;
-        this.listMotherboard = listMotherboard;
-        this.listPSU = listPSU;
-        this.listStorage = listStorage;
-        this.listCasePC = listCasePC;
-        this.cardListener = cardListener;
+    public mylist_adapter(ArrayList<MyList> listMylist, OnCardListener cardListener) {
         this.listMylist = listMylist;
+        this.cardListener = cardListener;
     }
 
     @NonNull
@@ -72,19 +61,12 @@ public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListVi
             holder.textView_component_4.setText(String.valueOf(listMylist.get(position).getStorage_id()));
             holder.harga_computer.setText(String.valueOf(listMylist.get(position).getHarga_Total()));
         }
-        holder.delete_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listMylist.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-                notifyItemRangeChanged(holder.getAdapterPosition(), listMylist.size());
-            }
-        });
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listMylist.size();
     }
 
 

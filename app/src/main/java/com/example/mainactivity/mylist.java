@@ -29,23 +29,18 @@ import model.Casepc;
 import model.GPU;
 import model.Memory;
 import model.Motherboard;
+import model.MyList;
 import model.PSU;
 import model.Storage;
 import model.componenttypesimpen;
+import model.user;
 
 public class mylist extends Fragment implements OnCardListener{
 
     //private String tipe = componenttypesimpen.tipepilihcomponent;
     private RecyclerView recyclerView_mylist;
     private mylist_adapter ml_adapter;
-    private ArrayList<CPU> listCPU;
-    private ArrayList<CPU_Cooler> listCPU_Cooler;
-    private ArrayList<GPU> listGPU;
-    private ArrayList<Memory> listMemory;
-    private ArrayList<Motherboard> listMotherboard;
-    private ArrayList<PSU> listPSU;
-    private ArrayList<Storage> listStorage;
-    private ArrayList<Casepc> listCasePC;
+    private ArrayList<MyList> ML;
     private OnCardListener cardListener;
 
     @Override
@@ -58,28 +53,14 @@ public class mylist extends Fragment implements OnCardListener{
 
         initview();
         setupRecyclerView();
-//        loadCPUdata();
-//        loadCPUCooler();
-//        loadGPU();
-        loadmemory();
-//        loadmotherboard();
-//        loadPSU();
-        loadStorage();
-//        loadCasepc();
+        Readmylist();
 
         return v;
     }
 
     private void initview(){
-        listCPU = new ArrayList<CPU>();
-        listCPU_Cooler = new ArrayList<CPU_Cooler>();
-        listGPU = new ArrayList<GPU>();
-        listMemory = new ArrayList<Memory>();
-        listMotherboard = new ArrayList<Motherboard>();
-        listPSU = new ArrayList<PSU>();
-        listStorage = new ArrayList<Storage>();
-        listCasePC = new ArrayList<Casepc>();
-        ml_adapter = new mylist_adapter(listCPU, listCPU_Cooler, listGPU, listMemory, listMotherboard, listPSU, listStorage, listCasePC, this);
+        ML = new ArrayList<MyList>();
+        ml_adapter = new mylist_adapter(ML, this);
     }
 
     private void setupRecyclerView() {
@@ -88,79 +69,52 @@ public class mylist extends Fragment implements OnCardListener{
         recyclerView_mylist.setAdapter(ml_adapter);
     }
 
+    private void Readmylist() {
+        String url = "http://192.168.1.14/letsbuildpc/readmylist.php";
+        RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonmylist = response.getJSONArray("cpu");
+                            for (int i = 0; i < jsonmylist.length(); i++) {
+                                JSONObject objcpu = jsonmylist.getJSONObject(i);
+                                MyList myList = new MyList();
+                                myList.setId_computer(objcpu.getInt("id_computer"));
+                                myList.setCPU(objcpu.getString("CPU"));
+                                myList.setCPU_Cooler(objcpu.getString("CPU_Cooler"));
+                                myList.setMotherboard(objcpu.getString("Motherboard"));
+                                myList.setMemory_id(objcpu.getInt("Memory_id"));
+                                myList.setGPU(objcpu.getString("GPU"));
+                                myList.setCasepc(objcpu.getString("Casepc"));
+                                myList.setPSU(objcpu.getString("PSU"));
+                                myList.setUser_ID(objcpu.getInt("User_id"));
+                                myList.setHarga_Total(objcpu.getInt("Harga_Total"));
+                                ML.add(myList);
+                            }
+                            ml_adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+        myQueue.add(request);
+    }
+
+
+
     @Override
     public void onCardClick(int position) {
 
     }
 
-    private void loadmemory() {
-        String url ="http://192.168.100.4/letsbuildpc/readmemory.php";
-        RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonmemory = response.getJSONArray("memory");
-                            for (int i = 0; i < jsonmemory.length(); i++){
-                                JSONObject objmemory = jsonmemory.getJSONObject(i);
-                                Memory memory = new Memory();
-                                memory.setId_memory(objmemory.getInt("id_memory"));
-                                memory.setNama_Memory(objmemory.getString("Nama_Memory"));
-                                memory.setSize(objmemory.getString("Size"));
-                                memory.setSpeed(objmemory.getInt("Speed"));
-                                memory.setHarga(objmemory.getInt("Harga"));
-                                listMemory.add(memory);
-                            }
-                            ml_adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
-        );
-        myQueue.add(request);
-    }
 
-    private void loadStorage() {
-        String url ="http://192.168.100.4/letsbuildpc/readstorage.php";
-        RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonstorage = response.getJSONArray("storage");
-                            for (int i = 0; i < jsonstorage.length(); i++){
-                                JSONObject objstorage = jsonstorage.getJSONObject(i);
-                                Storage storage = new Storage();
-                                storage.setId_storage(objstorage.getInt("id_storage"));
-                                storage.setNama_Storage(objstorage.getString("Nama_Storage"));
-                                storage.setStorage_Type(objstorage.getString("Storage_Type"));
-                                storage.setForm_Factor(objstorage.getString("Form_Factor"));
-                                storage.setHarga_Storage(objstorage.getInt("Harga_Storage"));
-                                storage.setSize_Storage(objstorage.getInt("Size_Storage"));
-                                listStorage.add(storage);
-                            }
-                            ml_adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
-        );
-        myQueue.add(request);
-    }
 }
