@@ -22,7 +22,6 @@ import model.MyList;
 import model.PSU;
 import model.Storage;
 import model.componenttypesimpen;
-import model.pickpc;
 import model.user;
 import model.userIDsimpen;
 

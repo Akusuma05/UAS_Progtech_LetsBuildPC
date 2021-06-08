@@ -37,8 +37,16 @@ import model.Memory;
 import model.Motherboard;
 import model.PSU;
 import model.Storage;
+import model.casepcsimpen;
 import model.componenttypesimpen;
+import model.cpucoolersimpen;
+import model.cpusimpen;
+import model.gpusimpen;
 import model.idpartsimpen;
+import model.memorysimpen;
+import model.motherboardsimpen;
+import model.psusimpen;
+import model.storagesimpen;
 import model.user;
 
 public class pilihcomponent extends Fragment implements OnCardListener {
@@ -100,28 +108,28 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     @Override
     public void onCardClick(int position) {
         if (tipe.equals("CPU")){
-            idpartsimpen.idpartsimpen = listCPU.get(position).getId_CPU();
+            cpusimpen.cpusimpen = listCPU.get(position).getNama_CPU();
             componenttypesimpen.tipepilihcomponent = "CPU";
         }else if(tipe.equals("CPUCooler")){
-            idpartsimpen.idpartsimpen = listCPU_Cooler.get(position).getId_cpucooler();
+            cpucoolersimpen.cpucoolersimpen = listCPU_Cooler.get(position).getNama_Cooler();
             componenttypesimpen.tipepilihcomponent = "CPUCooler";
         }else if(tipe.equals("Memory")){
-            idpartsimpen.idpartsimpen = listMemory.get(position).getId_memory();
+            memorysimpen.memorysimpen = listMemory.get(position).getId_memory();
             componenttypesimpen.tipepilihcomponent = "Memory";
         }else if(tipe.equals("Motherboard")){
-            idpartsimpen.idpartsimpen = listMotherboard.get(position).getId_motherboard();
+            motherboardsimpen.motherboardsimpen = listMotherboard.get(position).getNama_Motherboard();
             componenttypesimpen.tipepilihcomponent = "Motherboard";
         }else if(tipe.equals("Storage")){
-            idpartsimpen.idpartsimpen = listStorage.get(position).getId_storage();
+            storagesimpen.storagesimpen = listStorage.get(position).getId_storage();
             componenttypesimpen.tipepilihcomponent = "Storage";
         }else if(tipe.equals("PSU")){
-            idpartsimpen.idpartsimpen = listPSU.get(position).getId_psu();
+            psusimpen.psusimpen = listPSU.get(position).getNama_PSU();
             componenttypesimpen.tipepilihcomponent = "PSU";
         }else if(tipe.equals("GPU")){
-            idpartsimpen.idpartsimpen = listGPU.get(position).getId_gpu();
+            gpusimpen.gpusimpen = listGPU.get(position).getNama_GPU();
             componenttypesimpen.tipepilihcomponent = "GPU";
         }else if(tipe.equals("Case")){
-            idpartsimpen.idpartsimpen = listCasePC.get(position).getId_casepc();
+            casepcsimpen.casepcsimpen = listCasePC.get(position).getNama_Case();
             componenttypesimpen.tipepilihcomponent = "Case";
         }
 

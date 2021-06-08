@@ -12,6 +12,14 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import model.casepcsimpen;
+import model.cpucoolersimpen;
+import model.cpusimpen;
+import model.gpusimpen;
+import model.memorysimpen;
+import model.motherboardsimpen;
+import model.psusimpen;
+import model.storagesimpen;
 import model.user;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-
+        cpusimpen.cpusimpen = "";
+        cpucoolersimpen.cpucoolersimpen = "";
+        motherboardsimpen.motherboardsimpen = "";
+        memorysimpen.memorysimpen = 0;
+        storagesimpen.storagesimpen = 0;
+        gpusimpen.gpusimpen = "";
+        casepcsimpen.casepcsimpen = "";
+        psusimpen.psusimpen = "";
     }
 }

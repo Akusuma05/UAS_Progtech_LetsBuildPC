@@ -21,14 +21,13 @@ public class MyList implements Parcelable {
         Harga_Total = 0;
     }
 
-    public MyList(String CPU, String CPU_Cooler, String motherboard, String GPU, String casepc, String PSU, int id_computer, int memory_id, int storage_id, int user_ID, int harga_Total) {
+    public MyList(String CPU, String CPU_Cooler, String motherboard, String GPU, String casepc, String PSU, int memory_id, int storage_id, int user_ID, int harga_Total) {
         this.CPU = CPU;
         this.CPU_Cooler = CPU_Cooler;
         Motherboard = motherboard;
         this.GPU = GPU;
         Casepc = casepc;
         this.PSU = PSU;
-        this.id_computer = id_computer;
         Memory_id = memory_id;
         Storage_id = storage_id;
         User_ID = user_ID;
