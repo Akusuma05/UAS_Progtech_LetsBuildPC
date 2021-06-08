@@ -23,17 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import model.CPU;
-import model.CPU_Cooler;
-import model.Casepc;
-import model.GPU;
-import model.Memory;
-import model.Motherboard;
 import model.MyList;
-import model.PSU;
-import model.Storage;
-import model.componenttypesimpen;
-import model.user;
 
 public class mylist extends Fragment implements OnCardListener{
 

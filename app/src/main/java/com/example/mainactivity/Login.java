@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 import model.account;
 import model.user;
+import model.userIDsimpen;
 
 public class Login extends AppCompatActivity {
     private TextView registerhere_button, dont_have_account;
@@ -69,9 +70,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getBaseContext(), String.valueOf(listuser.size()), Toast.LENGTH_SHORT).show();
-
-
                 String email = input_email_login.getEditText().getText().toString().trim();
                 String password = input_password_login.getEditText().getText().toString().trim();
 
@@ -81,6 +79,8 @@ public class Login extends AppCompatActivity {
                         if (tempuser.getEmail().equalsIgnoreCase(email) && tempuser.getPassword().equals(password)) {
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
                             updatesudahlogin(tempuser.getId_user());
+                            userIDsimpen.useridsimpen = tempuser.getId_user();
+                            Toast.makeText(getBaseContext(), String.valueOf(userIDsimpen.useridsimpen), Toast.LENGTH_SHORT).show();
                             finish();
                             startActivity(intent);
                             berhasil = 1;
@@ -221,8 +221,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void updatesudahlogin(int id){
-
-
         String url = "http://192.168.1.14/letsbuildpc/Updatesudahloginuser.php";
 
         RequestQueue myRequest = Volley.newRequestQueue(this);
