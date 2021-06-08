@@ -15,11 +15,10 @@ public class user implements Parcelable {
         this.id_user = id_user;
     }
 
-    public user(String nama, String email, String password, String sudahlogin) {
+    public user(String nama, String email, String password) {
         this.nama = nama;
         this.email = email;
         this.password = password;
-        this.sudahlogin = sudahlogin;
     }
 
     protected user(Parcel in) {

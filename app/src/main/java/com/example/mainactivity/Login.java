@@ -184,7 +184,7 @@ public class Login extends AppCompatActivity {
     private void loadDataDB() {
 
 
-        String url ="http://192.168.100.4/letsbuildpc/ReadUser.php";
+        String url ="http://192.168.1.6/letsbuildpc/ReadUser.php";
 
         RequestQueue myQueue = Volley.newRequestQueue(this);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -223,7 +223,7 @@ public class Login extends AppCompatActivity {
     private void updatesudahlogin(int id){
 
 
-        String url = "http://192.168.100.4/letsbuildpc/Updatesudahloginuser.php";
+        String url = "http://192.168.1.6/letsbuildpc/Updatesudahloginuser.php";
 
         RequestQueue myRequest = Volley.newRequestQueue(this);
 
