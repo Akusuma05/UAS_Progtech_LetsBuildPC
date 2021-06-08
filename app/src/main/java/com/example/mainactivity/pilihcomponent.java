@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -99,26 +101,40 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     public void onCardClick(int position) {
         if (tipe.equals("CPU")){
             idpartsimpen.idpartsimpen = listCPU.get(position).getId_CPU();
+            componenttypesimpen.tipepilihcomponent = "CPU";
         }else if(tipe.equals("CPUCooler")){
             idpartsimpen.idpartsimpen = listCPU_Cooler.get(position).getId_cpucooler();
+            componenttypesimpen.tipepilihcomponent = "CPUCooler";
         }else if(tipe.equals("Memory")){
             idpartsimpen.idpartsimpen = listMemory.get(position).getId_memory();
+            componenttypesimpen.tipepilihcomponent = "Memory";
         }else if(tipe.equals("Motherboard")){
             idpartsimpen.idpartsimpen = listMotherboard.get(position).getId_motherboard();
+            componenttypesimpen.tipepilihcomponent = "Motherboard";
         }else if(tipe.equals("Storage")){
             idpartsimpen.idpartsimpen = listStorage.get(position).getId_storage();
+            componenttypesimpen.tipepilihcomponent = "Storage";
         }else if(tipe.equals("PSU")){
             idpartsimpen.idpartsimpen = listPSU.get(position).getId_psu();
+            componenttypesimpen.tipepilihcomponent = "PSU";
         }else if(tipe.equals("GPU")){
             idpartsimpen.idpartsimpen = listGPU.get(position).getId_gpu();
+            componenttypesimpen.tipepilihcomponent = "GPU";
         }else if(tipe.equals("Case")){
             idpartsimpen.idpartsimpen = listCasePC.get(position).getId_casepc();
+            componenttypesimpen.tipepilihcomponent = "Case";
         }
 
+        Fragment fragment = new addbuild();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void loadCPUdata() {
-        String url ="http://192.168.100.4/letsbuildpc/readCPU.php";
+        String url ="http://192.168.1.14/letsbuildpc/readCPU.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -155,7 +171,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     }
 
     private void loadCPUCooler() {
-        String url ="http://192.168.100.4/letsbuildpc/readcooler.php";
+        String url ="http://192.168.1.14/letsbuildpc/readcooler.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -191,7 +207,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     }
 
     private void loadGPU() {
-        String url ="http://192.168.100.4/letsbuildpc/readgpu.php";
+        String url ="http://192.168.1.14/letsbuildpc/readgpu.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -229,7 +245,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     }
 
     private void loadmemory() {
-        String url ="http://192.168.100.4/letsbuildpc/readmemory.php";
+        String url ="http://192.168.1.14/letsbuildpc/readmemory.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -264,7 +280,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     }
 
     private void loadmotherboard() {
-        String url ="http://192.168.100.4/letsbuildpc/readmotherboard.php";
+        String url ="http://192.168.1.14/letsbuildpc/readmotherboard.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -300,7 +316,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     }
 
     private void loadPSU() {
-        String url ="http://192.168.100.4/letsbuildpc/readpsu.php";
+        String url ="http://192.168.1.14/letsbuildpc/readpsu.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -337,7 +353,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     }
 
     private void loadStorage() {
-        String url ="http://192.168.100.4/letsbuildpc/readstorage.php";
+        String url ="http://192.168.1.14/letsbuildpc/readstorage.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -373,7 +389,7 @@ public class pilihcomponent extends Fragment implements OnCardListener {
     }
 
     private void loadCasepc() {
-        String url ="http://192.168.100.4/letsbuildpc/readcasepc.php";
+        String url ="http://192.168.1.14/letsbuildpc/readcasepc.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

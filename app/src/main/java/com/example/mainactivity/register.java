@@ -181,7 +181,7 @@ public class register extends AppCompatActivity {
     }
 
     private void createuser(user user) {
-        String url = "http://192.168.1.6/letsbuildpc/Createuser.php";
+        String url = "http://192.168.1.14/letsbuildpc/Createuser.php";
         RequestQueue myRequest = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

@@ -1,15 +1,10 @@
 package com.example.mainactivity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +12,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.zip.Inflater;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import model.CPU;
+import model.MyList;
 import model.componenttype;
 import model.componenttypesimpen;
-import model.pickpc;
-import model.pickpcArray;
 
 public class addbuild extends Fragment {
-    private ArrayList<pickpc> listpc = pickpcArray.pcpart;
+    private ArrayList<MyList> listpc = new ArrayList<MyList>();
     private TextView nama_cpu_build, harga_cpu_build, nama_cpucooler_build, harga_cpucooler_build, nama_Motherboard_build, harga_Motherboard_build, nama_Memory_build, harga_Memory_build,
             nama_Storage_build, harga_Storage_build, nama_GPU_build, harga_GPU_build, nama_Case_build, harga_Case_build, nama_PSU_build, harga_PSU_build, rpCPU, rpCPUCooler, rpMotherboard,
             rpMemory, rpStorage, rpGPU, rpCase, rpPSU;
@@ -89,15 +94,8 @@ public class addbuild extends Fragment {
         rpPSU = v.findViewById(R.id.rpPSU);
 
 
-        if (listpc.size() == 0){
-            id = 1;
-        }else{
-            id = listpc.get(listpc.size()).getId()+1;
-            pickpc list1 = new pickpc(id);
-            listpc.add(list1);
-        }
-
         //Main
+        Readmylist();
         DisableTextView();
         addcpu();
         addcpucooler();
@@ -110,6 +108,45 @@ public class addbuild extends Fragment {
         savebutton();
 
         return v;
+    }
+
+    private void Readmylist() {
+        String url ="http://192.168.1.14/letsbuildpc/readmylist.php";
+        RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonmylist = response.getJSONArray("cpu");
+                            for (int i = 0; i < jsonmylist.length(); i++){
+                                JSONObject objcpu = jsonmylist.getJSONObject(i);
+                                MyList myList = new MyList();
+                                myList.setId_computer(objcpu.getInt("id_computer"));
+                                myList.setCPU(objcpu.getString("CPU"));
+                                myList.setCPU_Cooler(objcpu.getString("CPU_Cooler"));
+                                myList.setMotherboard(objcpu.getString("Motherboard"));
+                                myList.setMemory_id(objcpu.getInt("Memory_id"));
+                                myList.setGPU(objcpu.getString("GPU"));
+                                myList.setCasepc(objcpu.getString("Casepc"));
+                                myList.setPSU(objcpu.getString("PSU"));
+                                myList.setUser_ID(objcpu.getInt("User_id"));
+                                myList.setHarga_Total(objcpu.getInt("Harga_Total"));
+                                listpc.add(myList);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+        myQueue.add(request);
     }
 
     private void DisableTextView() {
@@ -160,7 +197,10 @@ public class addbuild extends Fragment {
             button_edit_Case.setVisibility(View.INVISIBLE);
             button_edit_PSU.setVisibility(View.INVISIBLE);
         }else{
-            pickpc templistpc = listpc.get(id-1);
+            for (int i = 0; i < listpc.size(); i++){
+                MyList templistpc = listpc.get(i);
+                if (templistpc.getUser_ID() == )
+            }
 
             if(templistpc.getCPU()!=""){
                 nama_cpu_build.setVisibility(View.VISIBLE);
