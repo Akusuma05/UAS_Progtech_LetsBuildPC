@@ -976,6 +976,14 @@ public class addbuild extends Fragment {
                 int userid = userIDsimpen.useridsimpen;
                 MyList mylist = new MyList(cpu, cpucooler, motherboard , gpu, casepc, psu, memory, storage, userid, hargatotal);
                 buildpc(mylist);
+                cpusimpen.cpusimpen = "";
+                cpucoolersimpen.cpucoolersimpen = "";
+                motherboardsimpen.motherboardsimpen = "";
+                gpusimpen.gpusimpen = "";
+                casepcsimpen.casepcsimpen = "";
+                psusimpen.psusimpen = "";
+                memorysimpen.memorysimpen = 0;
+                storagesimpen.storagesimpen = 0;
             }
         });
     }
