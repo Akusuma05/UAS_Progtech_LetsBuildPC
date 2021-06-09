@@ -296,7 +296,7 @@ public class addbuild extends Fragment {
     }
 
     private void Readmylist() {
-        String url = "http://192.168.1.14/letsbuildpc/readmylist.php";
+        String url = "http://192.168.1.8/letsbuildpc/readmylist.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -335,7 +335,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadCPUdata() {
-        String url = "http://192.168.1.14/letsbuildpc/readCPU.php";
+        String url = "http://192.168.1.8/letsbuildpc/readCPU.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -391,7 +391,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadCPUCooler() {
-        String url = "http://192.168.1.14/letsbuildpc/readcooler.php";
+        String url = "http://192.168.1.8/letsbuildpc/readcooler.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -447,7 +447,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadGPU() {
-        String url = "http://192.168.1.14/letsbuildpc/readgpu.php";
+        String url = "http://192.168.1.8/letsbuildpc/readgpu.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -506,7 +506,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadmemory() {
-        String url = "http://192.168.1.14/letsbuildpc/readmemory.php";
+        String url = "http://192.168.1.8/letsbuildpc/readmemory.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -562,7 +562,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadmotherboard() {
-        String url = "http://192.168.1.14/letsbuildpc/readmotherboard.php";
+        String url = "http://192.168.1.8/letsbuildpc/readmotherboard.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -621,7 +621,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadPSU() {
-        String url = "http://192.168.1.14/letsbuildpc/readpsu.php";
+        String url = "http://192.168.1.8/letsbuildpc/readpsu.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -680,7 +680,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadStorage() {
-        String url = "http://192.168.1.14/letsbuildpc/readstorage.php";
+        String url = "http://192.168.1.8/letsbuildpc/readstorage.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -735,7 +735,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadCasepc() {
-        String url = "http://192.168.1.14/letsbuildpc/readcasepc.php";
+        String url = "http://192.168.1.8/letsbuildpc/readcasepc.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -922,12 +922,26 @@ public class addbuild extends Fragment {
     }
 
     private void savebutton() {
-        MyList mylist = new MyList(cpusimpen.cpusimpen, cpucoolersimpen.cpucoolersimpen, motherboardsimpen.motherboardsimpen, gpusimpen.gpusimpen, casepcsimpen.casepcsimpen, psusimpen.psusimpen, memorysimpen.memorysimpen, storagesimpen.storagesimpen, userIDsimpen.useridsimpen, hargatotal);
-        createuser(mylist);
+        button_save_build.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cpu = cpusimpen.cpusimpen;
+                String cpucooler = cpucoolersimpen.cpucoolersimpen;
+                String motherboard = motherboardsimpen.motherboardsimpen;
+                String gpu = gpusimpen.gpusimpen;
+                String casepc = casepcsimpen.casepcsimpen;
+                String psu = psusimpen.psusimpen;
+                int memory = memorysimpen.memorysimpen;
+                int storage = storagesimpen.storagesimpen;
+                int userid = userIDsimpen.useridsimpen;
+                MyList mylist = new MyList(cpu, cpucooler, motherboard , gpu, casepc, psu, memory, storage, userid, hargatotal);
+                buildpc(mylist);
+            }
+        });
     }
 
-    private void createuser(MyList temp) {
-        String url = "http://192.168.1.14/letsbuildpc/Createmylist.php";
+    private void buildpc(MyList temp) {
+        String url = "http://192.168.1.8/letsbuildpc/Createmylist.php";
         RequestQueue myRequest = Volley.newRequestQueue(getActivity().getApplicationContext());
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -957,7 +971,6 @@ public class addbuild extends Fragment {
                 data.put("PSU", temp.getPSU());
                 data.put("User_id", String.valueOf(temp.getUser_ID()));
                 data.put("Harga_Total", String.valueOf(temp.getHarga_Total()));
-
                 return data;
             }
         };

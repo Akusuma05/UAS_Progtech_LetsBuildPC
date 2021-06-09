@@ -23,14 +23,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import model.Memory;
 import model.MyList;
+import model.Storage;
+import model.userIDsimpen;
 
 public class mylist extends Fragment implements OnCardListener{
 
-    //private String tipe = componenttypesimpen.tipepilihcomponent;
     private RecyclerView recyclerView_mylist;
     private mylist_adapter ml_adapter;
     private ArrayList<MyList> ML;
+    private ArrayList<Storage> listStorage;
+    private ArrayList<Memory> listMemory;
+    private int userid = userIDsimpen.useridsimpen;
     private OnCardListener cardListener;
 
     @Override
@@ -44,13 +49,16 @@ public class mylist extends Fragment implements OnCardListener{
         initview();
         setupRecyclerView();
         Readmylist();
+        loadmemory();
 
         return v;
     }
 
     private void initview(){
         ML = new ArrayList<MyList>();
-        ml_adapter = new mylist_adapter(ML, this);
+        listStorage = new ArrayList<Storage>();
+        listMemory = new ArrayList<Memory>();
+        ml_adapter = new mylist_adapter(userid, listMemory, ML, this);
     }
 
     private void setupRecyclerView() {
@@ -60,14 +68,14 @@ public class mylist extends Fragment implements OnCardListener{
     }
 
     private void Readmylist() {
-        String url = "http://192.168.1.14/letsbuildpc/readmylist.php";
+        String url = "http://192.168.1.8/letsbuildpc/readmylist.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray jsonmylist = response.getJSONArray("cpu");
+                            JSONArray jsonmylist = response.getJSONArray("mylist");
                             for (int i = 0; i < jsonmylist.length(); i++) {
                                 JSONObject objcpu = jsonmylist.getJSONObject(i);
                                 MyList myList = new MyList();
@@ -82,6 +90,42 @@ public class mylist extends Fragment implements OnCardListener{
                                 myList.setUser_ID(objcpu.getInt("User_id"));
                                 myList.setHarga_Total(objcpu.getInt("Harga_Total"));
                                 ML.add(myList);
+                            }
+                            ml_adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+        myQueue.add(request);
+    }
+
+
+    private void loadmemory() {
+        String url ="http://192.168.1.8/letsbuildpc/readmemory.php";
+        RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonmemory = response.getJSONArray("memory");
+                            for (int i = 0; i < jsonmemory.length(); i++){
+                                JSONObject objmemory = jsonmemory.getJSONObject(i);
+                                Memory memory = new Memory();
+                                memory.setId_memory(objmemory.getInt("id_memory"));
+                                memory.setNama_Memory(objmemory.getString("Nama_Memory"));
+                                memory.setSize(objmemory.getString("Size"));
+                                memory.setSpeed(objmemory.getInt("Speed"));
+                                memory.setHarga(objmemory.getInt("Harga"));
+                                listMemory.add(memory);
                             }
                             ml_adapter.notifyDataSetChanged();
                         } catch (JSONException e) {

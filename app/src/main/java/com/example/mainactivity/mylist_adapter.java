@@ -27,23 +27,19 @@ import model.userIDsimpen;
 
 public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListViewholder> {
 
-    private int id = userIDsimpen.useridsimpen;
-
+    private int id;
     private ArrayList<Memory> listMemory;
-
-    private ArrayList<Storage> listStorage;
-
     private ArrayList<MyList> listMylist;
     private OnCardListener cardListener;
 
-    public mylist_adapter(ArrayList<MyList> listMylist, OnCardListener cardListener) {
+    public mylist_adapter(int id, ArrayList<Memory> listMemory, ArrayList<MyList> listMylist, OnCardListener cardListener) {
+        this.id = id;
+        this.listMemory = listMemory;
         this.listMylist = listMylist;
         this.cardListener = cardListener;
     }
 
     @NonNull
-
-
     @Override
     public mylist_adapter.MyListViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -54,14 +50,41 @@ public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListVi
     @Override
     public void onBindViewHolder(@NonNull mylist_adapter.MyListViewholder holder, int position) {
         if (listMylist.get(position).getUser_ID()==id){
+            holder.harga_computer.setVisibility(View.VISIBLE);
+            holder.textView_component_4.setVisibility(View.VISIBLE);
+            holder.textView_component_3.setVisibility(View.VISIBLE);
+            holder.textView_component_2.setVisibility(View.VISIBLE);
+            holder.textView_component_1.setVisibility(View.VISIBLE);
+            holder.textView_index_komputer.setVisibility(View.VISIBLE);
+            holder.CardView_list_komputer.setVisibility(View.VISIBLE);
+            holder.delete_icon.setVisibility(View.VISIBLE);
+
+            String namamemory = "";
+
+            for (int i = 0; i < listMemory.size(); i++){
+                Memory temp = listMemory.get(i);
+                if (listMylist.get(position).getMemory_id() == temp.getId_memory()){
+                    namamemory = temp.getNama_Memory();
+                    break;
+                }
+            }
+
             holder.textView_index_komputer.setText(String.valueOf(listMylist.get(position).getId_computer()));
             holder.textView_component_1.setText(listMylist.get(position).getCPU());
             holder.textView_component_2.setText(listMylist.get(position).getCPU_Cooler());
-            holder.textView_component_3.setText(String.valueOf(listMylist.get(position).getMemory_id()));
-            holder.textView_component_4.setText(String.valueOf(listMylist.get(position).getStorage_id()));
+            holder.textView_component_3.setText(namamemory);
+            holder.textView_component_4.setText(listMylist.get(position).getGPU());
             holder.harga_computer.setText(String.valueOf(listMylist.get(position).getHarga_Total()));
+        }else{
+            holder.harga_computer.setVisibility(View.GONE);
+            holder.textView_component_4.setVisibility(View.GONE);
+            holder.textView_component_3.setVisibility(View.GONE);
+            holder.textView_component_2.setVisibility(View.GONE);
+            holder.textView_component_1.setVisibility(View.GONE);
+            holder.textView_index_komputer.setVisibility(View.GONE);
+            holder.CardView_list_komputer.setVisibility(View.GONE);
+            holder.delete_icon.setVisibility(View.GONE);
         }
-
     }
 
     @Override
@@ -76,7 +99,6 @@ public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListVi
         private ImageView delete_icon;
 
         public MyListViewholder(@NonNull View itemView) {
-
             super(itemView);
             harga_computer = itemView.findViewById(R.id.harga_computer);
             textView_component_1 = itemView.findViewById(R.id.textView_component_1);
