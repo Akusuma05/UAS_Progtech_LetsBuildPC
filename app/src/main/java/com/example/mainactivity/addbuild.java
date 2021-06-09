@@ -66,11 +66,14 @@ public class addbuild extends Fragment {
     private ArrayList<MyList> listpc = new ArrayList<MyList>();
     private TextView nama_cpu_build, harga_cpu_build, nama_cpucooler_build, harga_cpucooler_build, nama_Motherboard_build, harga_Motherboard_build, nama_Memory_build, harga_Memory_build,
             nama_Storage_build, harga_Storage_build, nama_GPU_build, harga_GPU_build, nama_Case_build, harga_Case_build, nama_PSU_build, harga_PSU_build, rpCPU, rpCPUCooler, rpMotherboard,
-            rpMemory, rpStorage, rpGPU, rpCase, rpPSU;
+            rpMemory, rpStorage, rpGPU, rpCase, rpPSU, wattage_text, compatibility_text;
     private Button button_add_CPU, button_add_CPUCooler, button_add_Motherboard, button_add_Memory, button_add_Storage, button_add_GPU, button_add_Case, button_add_PSU, button_save_build,
             button_edit_CPU, button_edit_CPUCooler, button_edit_Motherboard, button_edit_Memory, button_edit_GPU, button_edit_Case, button_edit_PSU, button_edit_Storage;
     private int id = idpartsimpen.idpartsimpen;
     private int hargatotal = 0;
+    private int tdp = 0;
+    private String socketmobo = "";
+    private String socketcpu = "";
     private String type;
 
     @Override
@@ -97,6 +100,8 @@ public class addbuild extends Fragment {
         button_add_CPU = v.findViewById(R.id.button_add_CPU);
         nama_PSU_build = v.findViewById(R.id.nama_PSU_build);
         harga_PSU_build = v.findViewById(R.id.harga_PSU_build);
+        wattage_text = v.findViewById(R.id.wattage_text);
+        compatibility_text = v.findViewById(R.id.compatibility_text);
 
         button_edit_CPU = v.findViewById(R.id.button_edit_CPU);
         button_edit_CPUCooler = v.findViewById(R.id.button_edit_CPUCooler);
@@ -135,6 +140,7 @@ public class addbuild extends Fragment {
         listStorage = new ArrayList<Storage>();
         listCasePC = new ArrayList<Casepc>();
 
+        wattage_text.setText("Estimated total wattage 0 watt");
 
         //Main
         Readmylist();
@@ -364,9 +370,21 @@ public class addbuild extends Fragment {
 
                                 nama_cpu_build.setText(cpusimpen.cpusimpen);
                                 for (int i = 0; i < listCPU.size(); i++) {
-                                    if (cpusimpen.cpusimpen.equals(listCPU.get(i).getNama_CPU())) ;
-                                    harga_cpu_build.setText(String.valueOf(listCPU.get(i).getHarga()));
-                                    hargatotal = hargatotal + listCPU.get(i).getHarga();
+                                    if (cpusimpen.cpusimpen.equals(listCPU.get(i).getNama_CPU())){
+                                        harga_cpu_build.setText(String.valueOf(listCPU.get(i).getHarga()));
+                                        hargatotal = hargatotal + listCPU.get(i).getHarga();
+                                        tdp = tdp + listCPU.get(i).getTDP();
+                                        wattage_text.setText("Estimated total wattage: "+ String.valueOf(tdp));
+                                        socketcpu = listCPU.get(i).getSocket();
+                                        if (socketcpu.equals(socketmobo)){
+                                            compatibility_text.setText("No Compatible issues");
+                                            break;
+                                        }else{
+                                            compatibility_text.setText("CPU is not compatible with Motherboard");
+                                            break;
+                                        }
+
+                                    }
                                 }
                             } else {
                                 nama_cpu_build.setVisibility(View.INVISIBLE);
@@ -419,9 +437,11 @@ public class addbuild extends Fragment {
 
                                 nama_cpucooler_build.setText(cpucoolersimpen.cpucoolersimpen);
                                 for (int i = 0; i < listCPU_Cooler.size(); i++) {
-                                    if (cpucoolersimpen.cpucoolersimpen.equals(listCPU_Cooler.get(i).getNama_Cooler())) ;
-                                    harga_cpucooler_build.setText(String.valueOf(listCPU_Cooler.get(i).getHarga_Cooler()));
-                                    hargatotal = hargatotal + listCPU_Cooler.get(i).getHarga_Cooler();
+                                    if (cpucoolersimpen.cpucoolersimpen.equals(listCPU_Cooler.get(i).getNama_Cooler())){
+                                        harga_cpucooler_build.setText(String.valueOf(listCPU_Cooler.get(i).getHarga_Cooler()));
+                                        hargatotal = hargatotal + listCPU_Cooler.get(i).getHarga_Cooler();
+                                        break;
+                                    }
                                 }
                             } else {
                                 nama_cpucooler_build.setVisibility(View.INVISIBLE);
@@ -479,9 +499,13 @@ public class addbuild extends Fragment {
                                 nama_GPU_build.setText(gpusimpen.gpusimpen);
 
                                 for (int i = 0; i < listGPU.size(); i++) {
-                                    if (gpusimpen.gpusimpen.equals(listGPU.get(i).getNama_GPU())) ;
-                                    harga_GPU_build.setText(String.valueOf(listGPU.get(i).getHarga_GPU()));
-                                    hargatotal = hargatotal + listGPU.get(i).getHarga_GPU();
+                                    if (gpusimpen.gpusimpen.equals(listGPU.get(i).getNama_GPU())){
+                                        harga_GPU_build.setText(String.valueOf(listGPU.get(i).getHarga_GPU()));
+                                        hargatotal = hargatotal + listGPU.get(i).getHarga_GPU();
+                                        tdp = tdp + listGPU.get(i).getTDP_GPU();
+                                        wattage_text.setText("Estimated total wattage: "+ String.valueOf(tdp));
+                                        break;
+                                    }
                                 }
                             } else {
                                 button_edit_GPU.setVisibility(View.INVISIBLE);
@@ -532,11 +556,12 @@ public class addbuild extends Fragment {
                                 button_add_Memory.setVisibility(View.INVISIBLE);
 
                                 for (int i = 0; i < listMemory.size(); i++) {
-                                    if (memorysimpen.memorysimpen == listMemory.get(i).getId_memory());
-                                    nama_Memory_build.setText(listMemory.get(i).getNama_Memory());
-                                    harga_Memory_build.setText(String.valueOf(listMemory.get(i).getHarga()));
-                                    hargatotal = hargatotal + listMemory.get(i).getHarga();
-                                    break;
+                                    if (memorysimpen.memorysimpen == listMemory.get(i).getId_memory()){
+                                        nama_Memory_build.setText(listMemory.get(i).getNama_Memory());
+                                        harga_Memory_build.setText(String.valueOf(listMemory.get(i).getHarga()));
+                                        hargatotal = hargatotal + listMemory.get(i).getHarga();
+                                        break;
+                                    }
                                 }
                             } else {
                                 button_edit_Memory.setVisibility(View.INVISIBLE);
@@ -591,10 +616,20 @@ public class addbuild extends Fragment {
                                 nama_Motherboard_build.setText(motherboardsimpen.motherboardsimpen);
 
                                 for (int i = 0; i < listMotherboard.size(); i++) {
-                                    if (motherboardsimpen.motherboardsimpen.equals(listMotherboard.get(i).getNama_Motherboard()))
-                                        ;
-                                    harga_Motherboard_build.setText(String.valueOf(listMotherboard.get(i).getHarga_Motherboard()));
-                                    hargatotal = hargatotal + listMotherboard.get(i).getHarga_Motherboard();
+                                    if (motherboardsimpen.motherboardsimpen.equals(listMotherboard.get(i).getNama_Motherboard())){
+                                        harga_Motherboard_build.setText(String.valueOf(listMotherboard.get(i).getHarga_Motherboard()));
+                                        hargatotal = hargatotal + listMotherboard.get(i).getHarga_Motherboard();
+                                        socketmobo = listMotherboard.get(i).getSocket();
+                                        if (!socketcpu.equals("")){
+                                            if (socketmobo.equals(socketcpu)){
+                                                compatibility_text.setText("No Compatible issues");
+                                                break;
+                                            }else{
+                                                compatibility_text.setText("CPU is not compatible with Motherboard");
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
                             } else {
                                 nama_Motherboard_build.setVisibility(View.INVISIBLE);
@@ -651,9 +686,11 @@ public class addbuild extends Fragment {
                                 nama_PSU_build.setText(psusimpen.psusimpen);
 
                                 for (int i = 0; i < listPSU.size(); i++) {
-                                    if (psusimpen.psusimpen.equals(listPSU.get(i).getNama_PSU())) ;
-                                    harga_PSU_build.setText(String.valueOf(listPSU.get(i).getHarga_PSU()));
-                                    hargatotal = hargatotal + listPSU.get(i).getHarga_PSU();
+                                    if (psusimpen.psusimpen.equals(listPSU.get(i).getNama_PSU())){
+                                        harga_PSU_build.setText(String.valueOf(listPSU.get(i).getHarga_PSU()));
+                                        hargatotal = hargatotal + listPSU.get(i).getHarga_PSU();
+                                        break;
+                                    }
                                 }
                             } else {
                                 nama_PSU_build.setVisibility(View.INVISIBLE);
@@ -707,10 +744,12 @@ public class addbuild extends Fragment {
                                 button_add_Storage.setVisibility(View.INVISIBLE);
 
                                 for (int i = 0; i < listStorage.size(); i++) {
-                                    if (storagesimpen.storagesimpen == listStorage.get(i).getId_storage()) ;
-                                    nama_Storage_build.setText(listStorage.get(i).getNama_Storage());
-                                    harga_Storage_build.setText(String.valueOf(listStorage.get(i).getHarga_Storage()));
-                                    hargatotal = hargatotal + listStorage.get(i).getHarga_Storage();
+                                    if (storagesimpen.storagesimpen == listStorage.get(i).getId_storage()){
+                                        nama_Storage_build.setText(listStorage.get(i).getNama_Storage());
+                                        harga_Storage_build.setText(String.valueOf(listStorage.get(i).getHarga_Storage()));
+                                        hargatotal = hargatotal + listStorage.get(i).getHarga_Storage();
+                                        break;
+                                    }
                                 }
                             } else {
                                 button_edit_Storage.setVisibility(View.INVISIBLE);
@@ -764,10 +803,11 @@ public class addbuild extends Fragment {
                                 nama_Case_build.setText(casepcsimpen.casepcsimpen);
 
                                 for (int i = 0; i < listCasePC.size(); i++) {
-                                    if (casepcsimpen.casepcsimpen.equals(listCasePC.get(i).getNama_Case()))
-                                        ;
-                                    harga_Case_build.setText(String.valueOf(listCasePC.get(i).getHarga_Case()));
-                                    hargatotal = hargatotal + listCasePC.get(i).getHarga_Case();
+                                    if (casepcsimpen.casepcsimpen.equals(listCasePC.get(i).getNama_Case())){
+                                        harga_Case_build.setText(String.valueOf(listCasePC.get(i).getHarga_Case()));
+                                        hargatotal = hargatotal + listCasePC.get(i).getHarga_Case();
+                                        break;
+                                    }
                                 }
                             } else {
                                 button_edit_Case.setVisibility(View.INVISIBLE);

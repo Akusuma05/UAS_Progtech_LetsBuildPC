@@ -80,7 +80,6 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
                             updatesudahlogin(tempuser.getId_user());
                             userIDsimpen.useridsimpen = tempuser.getId_user();
-                            Toast.makeText(getBaseContext(), String.valueOf(userIDsimpen.useridsimpen), Toast.LENGTH_SHORT).show();
                             finish();
                             startActivity(intent);
                             berhasil = 1;
