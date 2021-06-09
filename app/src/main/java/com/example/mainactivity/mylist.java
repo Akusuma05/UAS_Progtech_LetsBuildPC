@@ -150,7 +150,7 @@ public class mylist extends Fragment implements OnCardListener{
 
     @Override
     public void onCardClick(int position) {
-        int id = ML.get(position).getId_computer();
+        int id = position;
         deletemylist(id);
     }
 
