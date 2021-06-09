@@ -100,7 +100,6 @@ public class userinfo extends Fragment{
                                 user1.setSudahlogin(objuser.getString("Sudah_Login"));
                                 listuser.add(user1);
                             }
-                            Toast.makeText(getContext(), String.valueOf(listuser.size()), Toast.LENGTH_LONG).show();
 
                             for (int i = 0; i <listuser.size(); i++){
                                 user tempuser = listuser.get(i);
