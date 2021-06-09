@@ -115,7 +115,7 @@ public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListVi
                             listMylist.remove(getAdapterPosition());
                             notifyItemRemoved(getAdapterPosition());
                             notifyItemRangeChanged(getAdapterPosition(), listMylist.size());
-
+                            cardListener.onCardClick(getAdapterPosition());
                     };
                 }
             );
