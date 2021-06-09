@@ -112,10 +112,11 @@ public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListVi
             delete_icon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    cardListener.onCardClick(listMylist.get(getAdapterPosition()).getId_computer());
                             listMylist.remove(getAdapterPosition());
                             notifyItemRemoved(getAdapterPosition());
                             notifyItemRangeChanged(getAdapterPosition(), listMylist.size());
-                            cardListener.onCardClick(getAdapterPosition());
+
                     };
                 }
             );
