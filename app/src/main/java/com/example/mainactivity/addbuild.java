@@ -69,7 +69,7 @@ public class addbuild extends Fragment {
             rpMemory, rpStorage, rpGPU, rpCase, rpPSU, wattage_text, compatibility_text;
     private Button button_add_CPU, button_add_CPUCooler, button_add_Motherboard, button_add_Memory, button_add_Storage, button_add_GPU, button_add_Case, button_add_PSU, button_save_build,
             button_edit_CPU, button_edit_CPUCooler, button_edit_Motherboard, button_edit_Memory, button_edit_GPU, button_edit_Case, button_edit_PSU, button_edit_Storage;
-    private int id = idpartsimpen.idpartsimpen;
+//    private int id = idpartsimpen.idpartsimpen;
     private int hargatotal = 0;
     private int tdp = 0;
     private String socketmobo = "";
@@ -177,7 +177,6 @@ public class addbuild extends Fragment {
         button_edit_Memory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Memory");
                 componenttypesimpen.tipepilihcomponent = "Memory";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -193,7 +192,6 @@ public class addbuild extends Fragment {
         button_edit_Case.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Case");
                 componenttypesimpen.tipepilihcomponent = "Case";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -209,7 +207,6 @@ public class addbuild extends Fragment {
         button_edit_Storage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Storage");
                 componenttypesimpen.tipepilihcomponent = "Storage";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -225,7 +222,6 @@ public class addbuild extends Fragment {
         button_edit_PSU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("PSU");
                 componenttypesimpen.tipepilihcomponent = "PSU";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -241,7 +237,6 @@ public class addbuild extends Fragment {
         button_edit_GPU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("GPU");
                 componenttypesimpen.tipepilihcomponent = "GPU";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -257,7 +252,6 @@ public class addbuild extends Fragment {
         button_edit_Motherboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Motherboard");
                 componenttypesimpen.tipepilihcomponent = "Motherboard";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -273,7 +267,6 @@ public class addbuild extends Fragment {
         button_edit_CPUCooler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("CPUCooler");
                 componenttypesimpen.tipepilihcomponent = "CPUCooler";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -289,7 +282,6 @@ public class addbuild extends Fragment {
         button_edit_CPU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("CPU");
                 componenttypesimpen.tipepilihcomponent = "CPU";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -837,7 +829,6 @@ public class addbuild extends Fragment {
         button_add_CPU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("CPU");
                 componenttypesimpen.tipepilihcomponent = "CPU";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -853,7 +844,6 @@ public class addbuild extends Fragment {
         button_add_CPUCooler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("CPUCooler");
                 componenttypesimpen.tipepilihcomponent = "CPUCooler";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -869,7 +859,6 @@ public class addbuild extends Fragment {
         button_add_Memory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Memory");
                 componenttypesimpen.tipepilihcomponent = "Memory";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -885,7 +874,6 @@ public class addbuild extends Fragment {
         button_add_Motherboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Motherboard");
                 componenttypesimpen.tipepilihcomponent = "Motherboard";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -901,7 +889,6 @@ public class addbuild extends Fragment {
         button_add_Storage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Storage");
                 componenttypesimpen.tipepilihcomponent = "Storage";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -917,7 +904,6 @@ public class addbuild extends Fragment {
         button_add_PSU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("PSU");
                 componenttypesimpen.tipepilihcomponent = "PSU";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -933,7 +919,6 @@ public class addbuild extends Fragment {
         button_add_GPU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("GPU");
                 componenttypesimpen.tipepilihcomponent = "GPU";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -949,7 +934,6 @@ public class addbuild extends Fragment {
         button_add_Case.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componenttype componenttype = new componenttype("Case");
                 componenttypesimpen.tipepilihcomponent = "Case";
                 Fragment fragment = new pilihcomponent();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

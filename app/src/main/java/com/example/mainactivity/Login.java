@@ -1,6 +1,5 @@
 package com.example.mainactivity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,14 +30,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import model.account;
 import model.user;
 import model.userIDsimpen;
 
 public class Login extends AppCompatActivity {
-    private TextView registerhere_button, dont_have_account;
+    private TextView registerhere_button;
     private Button login_button;
-    private ImageView logo_login;
     private TextInputLayout input_email_login, input_password_login;
     private ArrayList<user> listuser = new ArrayList<user>();
     private Boolean validateEmail, validatePassword;
@@ -54,10 +50,8 @@ public class Login extends AppCompatActivity {
         //Deklarasi
         registerhere_button = findViewById(R.id.registerhere_button);
         login_button = findViewById(R.id.login_button);
-        logo_login = findViewById(R.id.logo_login);
         input_email_login = findViewById(R.id.input_email_login);
         input_password_login = findViewById(R.id.input_password_login);
-        dont_have_account = findViewById(R.id.dont_have_account);
         loadDataDB();
 
 
@@ -181,8 +175,6 @@ public class Login extends AppCompatActivity {
 
 
     private void loadDataDB() {
-
-
         String url ="http://192.168.1.4/letsbuildpc/ReadUser.php";
 
         RequestQueue myQueue = Volley.newRequestQueue(this);
@@ -215,26 +207,21 @@ public class Login extends AppCompatActivity {
                     }
                 }
         );
-
         myQueue.add(request);
     }
 
     private void updatesudahlogin(int id){
         String url = "http://192.168.1.4/letsbuildpc/Updatesudahloginuser.php";
-
         RequestQueue myRequest = Volley.newRequestQueue(this);
-
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 }
         ){

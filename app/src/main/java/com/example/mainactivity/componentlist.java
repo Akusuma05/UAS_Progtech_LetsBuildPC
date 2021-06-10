@@ -38,7 +38,7 @@ import model.Storage;
 import model.componenttype;
 import model.componenttypesimpen;
 
-public class componentlist extends Fragment implements OnCardListener {
+public class componentlist extends Fragment {
 
     private String tipe = "";
     private RecyclerView recyclerview_complist;
@@ -51,7 +51,6 @@ public class componentlist extends Fragment implements OnCardListener {
     private ArrayList<PSU> listPSU;
     private ArrayList<Storage> listStorage;
     private ArrayList<Casepc> listCasePC;
-    private OnCardListener cardListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,18 +121,13 @@ public class componentlist extends Fragment implements OnCardListener {
         listPSU = new ArrayList<PSU>();
         listStorage = new ArrayList<Storage>();
         listCasePC = new ArrayList<Casepc>();
-        spin_adapter = new spinner_adapter(listCPU, listCPU_Cooler, listGPU, listMemory, listMotherboard, listPSU, listStorage, listCasePC, this);
+        spin_adapter = new spinner_adapter(listCPU, listCPU_Cooler, listGPU, listMemory, listMotherboard, listPSU, listStorage, listCasePC);
     }
 
     private void setupRecyclerView() {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerview_complist.setLayoutManager(manager);
         recyclerview_complist.setAdapter(spin_adapter);
-    }
-
-    @Override
-    public void onCardClick(int position) {
-
     }
 
     private void loadCPUdata() {

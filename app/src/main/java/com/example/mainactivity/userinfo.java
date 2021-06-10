@@ -4,16 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,22 +20,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.regex.Pattern;
 
-import model.account;
 import model.user;
-import model.userIDsimpen;
 
 public class userinfo extends Fragment{
     private TextView  nama_user;
@@ -105,7 +94,7 @@ public class userinfo extends Fragment{
                                 user tempuser = listuser.get(i);
                                 if (tempuser.getSudahlogin().equals("yes")){
                                     nama_user.setText(tempuser.getNama());
-                                    userIDsimpen.useridsimpen = tempuser.getId_user();
+//                                    userIDsimpen.useridsimpen = tempuser.getId_user();
                                 }
                             }
 //                            adapter.notifyDataSetChanged();

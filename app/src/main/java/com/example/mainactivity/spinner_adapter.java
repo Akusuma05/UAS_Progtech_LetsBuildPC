@@ -33,10 +33,9 @@ public class spinner_adapter extends RecyclerView.Adapter<spinner_adapter.Spinne
     private ArrayList<PSU> listPSU;
     private ArrayList<Storage> listStorage;
     private ArrayList<Casepc> listCasePC;
-    private OnCardListener cardListener;
     private String tipe = componenttypesimpen.tipepilihcomponent;
 
-    public spinner_adapter(ArrayList<CPU> listCPU, ArrayList<CPU_Cooler> listCPU_Cooler, ArrayList<GPU> listGPU, ArrayList<Memory> listMemory, ArrayList<Motherboard> listMotherboard, ArrayList<PSU> listPSU, ArrayList<Storage> listStorage, ArrayList<Casepc> listCasePC, OnCardListener cardListener) {
+    public spinner_adapter(ArrayList<CPU> listCPU, ArrayList<CPU_Cooler> listCPU_Cooler, ArrayList<GPU> listGPU, ArrayList<Memory> listMemory, ArrayList<Motherboard> listMotherboard, ArrayList<PSU> listPSU, ArrayList<Storage> listStorage, ArrayList<Casepc> listCasePC) {
         this.listCPU = listCPU;
         this.listCPU_Cooler = listCPU_Cooler;
         this.listGPU = listGPU;
@@ -45,11 +44,9 @@ public class spinner_adapter extends RecyclerView.Adapter<spinner_adapter.Spinne
         this.listPSU = listPSU;
         this.listStorage = listStorage;
         this.listCasePC = listCasePC;
-        this.cardListener = cardListener;
     }
 
     @NonNull
-
     @Override
     public SpinnerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -127,20 +124,12 @@ public class spinner_adapter extends RecyclerView.Adapter<spinner_adapter.Spinne
 
     public class SpinnerViewHolder extends RecyclerView.ViewHolder {
         private TextView tipe_more_component, harga_more_component;
-        private CardView CardView_more_component;
 
         public SpinnerViewHolder(@NonNull View itemView) {
             super(itemView);
             tipe_more_component = itemView.findViewById(R.id.tipe_more_component);
             harga_more_component = itemView.findViewById(R.id.harga_more_component);
-            CardView_more_component = itemView.findViewById(R.id.CardView_more_component);
 
-            CardView_more_component.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        cardListener.onCardClick(getAdapterPosition());
-                    }
-            });
         }
     }
 }
