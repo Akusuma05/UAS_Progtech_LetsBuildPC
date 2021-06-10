@@ -74,7 +74,7 @@ public class mylist_adapter extends RecyclerView.Adapter<mylist_adapter.MyListVi
             holder.textView_component_2.setText(listMylist.get(position).getCPU_Cooler());
             holder.textView_component_3.setText(namamemory);
             holder.textView_component_4.setText(listMylist.get(position).getGPU());
-            holder.harga_computer.setText(String.valueOf(listMylist.get(position).getHarga_Total()));
+            holder.harga_computer.setText("Rp." +String.valueOf(listMylist.get(position).getHarga_Total()));
         }else{
             holder.harga_computer.setVisibility(View.GONE);
             holder.textView_component_4.setVisibility(View.GONE);

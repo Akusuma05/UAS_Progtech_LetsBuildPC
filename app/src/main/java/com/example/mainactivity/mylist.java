@@ -72,7 +72,7 @@ public class mylist extends Fragment implements OnCardListener{
     }
 
     private void Readmylist() {
-        String url = "http://192.168.1.8/letsbuildpc/readmylist.php";
+        String url = "http://192.168.1.4/letsbuildpc/readmylist.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -113,7 +113,7 @@ public class mylist extends Fragment implements OnCardListener{
 
 
     private void loadmemory() {
-        String url ="http://192.168.1.8/letsbuildpc/readmemory.php";
+        String url ="http://192.168.1.4/letsbuildpc/readmemory.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -155,7 +155,7 @@ public class mylist extends Fragment implements OnCardListener{
     }
 
     private void deletemylist(int id){
-        String url = "http://192.168.1.8/letsbuildpc/deletemylist.php";
+        String url = "http://192.168.1.4/letsbuildpc/deletemylist.php";
         RequestQueue myRequest = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         StringRequest request = new StringRequest(Request.Method.POST, url,

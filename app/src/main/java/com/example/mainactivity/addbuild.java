@@ -302,7 +302,7 @@ public class addbuild extends Fragment {
     }
 
     private void Readmylist() {
-        String url = "http://192.168.1.8/letsbuildpc/readmylist.php";
+        String url = "http://192.168.1.4/letsbuildpc/readmylist.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -341,7 +341,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadCPUdata() {
-        String url = "http://192.168.1.8/letsbuildpc/readCPU.php";
+        String url = "http://192.168.1.4/letsbuildpc/readCPU.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -409,7 +409,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadCPUCooler() {
-        String url = "http://192.168.1.8/letsbuildpc/readcooler.php";
+        String url = "http://192.168.1.4/letsbuildpc/readcooler.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -467,7 +467,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadGPU() {
-        String url = "http://192.168.1.8/letsbuildpc/readgpu.php";
+        String url = "http://192.168.1.4/letsbuildpc/readgpu.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -530,7 +530,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadmemory() {
-        String url = "http://192.168.1.8/letsbuildpc/readmemory.php";
+        String url = "http://192.168.1.4/letsbuildpc/readmemory.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -587,7 +587,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadmotherboard() {
-        String url = "http://192.168.1.8/letsbuildpc/readmotherboard.php";
+        String url = "http://192.168.1.4/letsbuildpc/readmotherboard.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -656,7 +656,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadPSU() {
-        String url = "http://192.168.1.8/letsbuildpc/readpsu.php";
+        String url = "http://192.168.1.4/letsbuildpc/readpsu.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -717,7 +717,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadStorage() {
-        String url = "http://192.168.1.8/letsbuildpc/readstorage.php";
+        String url = "http://192.168.1.4/letsbuildpc/readstorage.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -774,7 +774,7 @@ public class addbuild extends Fragment {
     }
 
     private void loadCasepc() {
-        String url = "http://192.168.1.8/letsbuildpc/readcasepc.php";
+        String url = "http://192.168.1.4/letsbuildpc/readcasepc.php";
         RequestQueue myQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -984,12 +984,18 @@ public class addbuild extends Fragment {
                 psusimpen.psusimpen = "";
                 memorysimpen.memorysimpen = 0;
                 storagesimpen.storagesimpen = 0;
+                Fragment fragment = new mylist();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
     }
 
     private void buildpc(MyList temp) {
-        String url = "http://192.168.1.8/letsbuildpc/Createmylist.php";
+        String url = "http://192.168.1.4/letsbuildpc/Createmylist.php";
         RequestQueue myRequest = Volley.newRequestQueue(getActivity().getApplicationContext());
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
